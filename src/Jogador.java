@@ -4,6 +4,8 @@ public class Jogador {
     private Tabuleiro tabuleiro;
     private ArrayList<Integer[]> jogadas;
     private ArrayList<Integer[]> PosicaoTesouros;
+    private int[] peças = {6,10,4,6,4,10,6,4};
+    private int contador = 0;
     private int pontos;
     private int pçsAmarelas;
     private int pçsVerdes;
@@ -19,7 +21,10 @@ public class Jogador {
         this.pçsVermelhas = 2;
     }
 
-    
+    public void posicionarTesouro(int linha, int coluna){
+        this.tabuleiro.setVetByIndex(linha,coluna,this.peças[this.contador]);
+        this.contador++;
+    }
     public void posicionarTesouro(int linha, int coluna, String cor){
         if(cor.equalsIgnoreCase("amarelo")){
             this.tabuleiro.setVetByIndex(linha,coluna,4);
