@@ -11,6 +11,7 @@ public class Jogador {
     private int pçsVerdes;
     private int pçsVermelhas;
 
+    // Constructor do jogador
     Jogador(){
         this.tabuleiro = new Tabuleiro();
         this.jogadas = new ArrayList<>();
@@ -21,14 +22,23 @@ public class Jogador {
         this.pçsVermelhas = 2;
     }
 
+    // Metodo de posicionar tesouro sem informar a cor
     public void posicionarTesouro(int linha, int coluna){
-        this.tabuleiro.setVetByIndex(linha,coluna,this.peças[this.contador]);
-        this.contador++;
+        if(contador<this.peças.length){ //Checa se ainda existem peças a serem posicionadas
+            // Posiciona o valor de acordo com a ordem determinada no vetor peças
+            this.tabuleiro.setVetByIndex(linha,coluna,this.peças[this.contador]);
+            this.contador++;
+        }else{
+            System.out.println("Todas as peças foram posicionadas");
+        }
+
     }
+
+    // Metodo de posicionar tesouro com a cor sendo informada
     public void posicionarTesouro(int linha, int coluna, String cor){
         if(cor.equalsIgnoreCase("amarelo")){
-            this.tabuleiro.setVetByIndex(linha,coluna,4);
-            this.pçsAmarelas --;
+            this.tabuleiro.setVetByIndex(linha,coluna,4); // Posiciona o valor da peça na casa indicada
+            this.pçsAmarelas --; // Diminui o número de pçs restantes da cor específica a serem posicionadas
         }else if(cor.equalsIgnoreCase("verde")){
             this.tabuleiro.setVetByIndex(linha,coluna,6);
             this.pçsVerdes --;
@@ -36,16 +46,27 @@ public class Jogador {
             this.tabuleiro.setVetByIndex(linha,coluna,10);
             this.pçsVermelhas --;
         }
+        this.PosicaoTesouros.add(new Integer[]{linha,coluna});
     }
 
+    // Metodo de atacar que adiciona a jogada feita pelo jogador e atualiza sua pontuação
+    public void atacar(Integer[] j,int p){
+        this.jogadas.add(j);
+        this.pontos += p;
+    }
+
+    // Getters das variáveis da classe Jogador
     public ArrayList<Integer[]> getJogadas(){
         return this.jogadas;
     }
-    public int getPontos(){
-        return this.pontos;
-    }
     public ArrayList<Integer[]> getPosicaoTesouros(){
         return this.PosicaoTesouros;
+    }
+    public int getPosicao(int l, int c){
+        return this.tabuleiro.getVetByIndex(l,c);
+    }
+    public int getPontos(){
+        return this.pontos;
     }
     public int getPçsAmarelas(){
         return this.pçsAmarelas;
@@ -55,19 +76,6 @@ public class Jogador {
     }
     public int getPçsVermelhas(){
         return this.pçsVermelhas;
-    }
-    public int getPosicao(int l, int c){
-        return this.tabuleiro.getVetByIndex(l,c);
-    }
-    public void setPontos(int p){
-        this.pontos += p;
-    }
-
-    public void addJogada(Integer[] j){
-        this.jogadas.add(j);
-    }
-    public void addPosicaoTesouros(Integer[] j){
-        this.PosicaoTesouros.add(j);
     }
 
 }
