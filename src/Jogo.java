@@ -55,7 +55,7 @@ public class Jogo {
         }
         }
 
-    // Posiciona a peça nas posicoes passadas pelo jogador
+    // Posiciona a peça nas posicoes passadas pelo jogador com cor
     public boolean posicionaPeca(int l, int c,int id, String cor){
         if(validaValores(l,c,this.jogadores.get(id).getPosicaoTesouros())){
             if(validaCores(id, cor)){
@@ -64,6 +64,16 @@ public class Jogo {
             }else{
                 return false;
             }
+        }else{
+            return false;
+        }
+    }
+
+    // Posiciona a peça nas posicoes passadas pelo jogador sem cor
+    public boolean posicionaPeca(int l, int c,int id){
+        if(validaValores(l,c,this.jogadores.get(id).getPosicaoTesouros())){
+            this.jogadores.get(id).posicionarTesouro(l,c);
+            return true;
         }else{
             return false;
         }

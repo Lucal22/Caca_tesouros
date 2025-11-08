@@ -10,8 +10,15 @@ public class Main {
 
     // Metodo para ambos os jogadores fazerem o posicionamento das peças
     public static void posicionaPecas(Jogo j, Scanner in){
-        int l,c;
+        int l,c,m;
         String cor;
+
+        // Define se o jogo será jogado com cores ou sem
+        System.out.println("\nComo desejam posicionar?");
+        System.out.println("1 - Com cores");
+        System.out.println("2 - Sem cores");
+        m = in.nextInt();
+
         // Cada jogador posiciona uma peça por vez, portanto o loop se repete por 8 vezes até que todas sejam posicionadas.
         for(int i =1; i<=8;i++){
             boolean j1Jogou,j2Jogou;
@@ -23,13 +30,27 @@ public class Main {
                 System.out.println("\nDigite a coluna em que quer esconder o tesouro (0 a 9):");
                 c = in.nextInt();
                 in.nextLine();
-                System.out.println("\nDigite a cor do tesouro que deseja esconder:");
-                System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
-                System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
-                System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
-                cor = in.nextLine();
-                j1Jogou = j.posicionaPeca(l,c,0,cor);
+
+                // case 1 caso tenha sido escolhido o jogo com cores e case 2 caso tenha sido escolhido o jogo sem cores
+                switch (m){
+                    case 1:
+                        System.out.println("\nDigite a cor do tesouro que deseja esconder (verde, vermelho, amarelo):");
+                        System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
+                        System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
+                        System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
+                        cor = in.nextLine();
+                        j1Jogou = j.posicionaPeca(l,c,0,cor);
+                        break;
+                    case 2:
+                        j1Jogou = j.posicionaPeca(l,c,0);
+                        break;
+                    default:
+                        System.out.println("Informe o valor da condição do jogo corretamente (Com cor ou sem cor).");
+                        return;
+                }
+
             }while (!j1Jogou);
+
             do{
                 System.out.println("\nJogador 2:");
                 System.out.println("Digite a linha em que quer esconder o tesouro (0 a 9):");
@@ -37,12 +58,22 @@ public class Main {
                 System.out.println("\nDigite a coluna em que quer esconder o tesouro (0 a 9):");
                 c = in.nextInt();
                 in.nextLine();
-                System.out.println("\nDigite a cor do tesouro que deseja esconder (Verde, Vermelho, Amarelo):");
-                System.out.println("Verdes restantes: "+j.getJogadores().getLast().getPçsVerdes());
-                System.out.println("Vermelhas restantes: "+j.getJogadores().getLast().getPçsVermelhas());
-                System.out.println("Amarelas restantes: "+j.getJogadores().getLast().getPçsAmarelas());
-                cor = in.nextLine();
-                j2Jogou = j.posicionaPeca(l,c,1,cor);
+                switch (m){
+                    case 1:
+                        System.out.println("\nDigite a cor do tesouro que deseja esconder (verde, vermelho, amarelo):");
+                        System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
+                        System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
+                        System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
+                        cor = in.nextLine();
+                        j2Jogou = j.posicionaPeca(l,c,1,cor);
+                        break;
+                    case 2:
+                        j2Jogou = j.posicionaPeca(l,c,1);
+                        break;
+                    default:
+                        System.out.println("Informe o valor da condição do jogo corretamente (Com cor ou sem cor).");
+                        return;
+                }
             }while (!j2Jogou);
 
         }
