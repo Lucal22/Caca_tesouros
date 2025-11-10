@@ -3,19 +3,16 @@ import java.util.ArrayList;
 public class Jogador {
     private Tabuleiro tabuleiro;
     private ArrayList<Integer[]> jogadas;
-    private ArrayList<Integer[]> PosicaoTesouros;
+    private ArrayList<Integer[]> posicaoTesouros;
     private int[] peças = {6,10,4,6,4,10,6,4};
-    private int contador = 0;
-    private int pontos;
-    private int pçsAmarelas;
-    private int pçsVerdes;
-    private int pçsVermelhas;
+    private int contador,pontos,pçsAmarelas,pçsVerdes,pçsVermelhas;
 
     // Constructor do jogador
     Jogador(){
         this.tabuleiro = new Tabuleiro();
         this.jogadas = new ArrayList<>();
-        this.PosicaoTesouros = new ArrayList<>();
+        this.posicaoTesouros = new ArrayList<>();
+        this.contador = 0;
         this.pontos = 0;
         this.pçsAmarelas =3;
         this.pçsVerdes = 3;
@@ -46,7 +43,7 @@ public class Jogador {
             this.tabuleiro.setVetByIndex(linha,coluna,10);
             this.pçsVermelhas --;
         }
-        this.PosicaoTesouros.add(new Integer[]{linha,coluna});
+        this.posicaoTesouros.add(new Integer[]{linha,coluna});
     }
 
     // Metodo de atacar que adiciona a jogada feita pelo jogador e atualiza sua pontuação
@@ -60,10 +57,10 @@ public class Jogador {
         return this.jogadas;
     }
     public ArrayList<Integer[]> getPosicaoTesouros(){
-        return this.PosicaoTesouros;
+        return this.posicaoTesouros;
     }
-    public int getPosicao(int l, int c){
-        return this.tabuleiro.getVetByIndex(l,c);
+    public int getPosicao(int linha, int coluna){
+        return this.tabuleiro.getVetByIndex(linha,coluna);
     }
     public int getPontos(){
         return this.pontos;

@@ -20,13 +20,13 @@ public class Jogo {
     }
 
     // Faz validação dos valores passados pelo jogador
-    private boolean validaValores(int l, int c, ArrayList<Integer[]> j){
-        if(l<0 || c<0 || l>9 || c>9){ // Checa se os valores estão dentro do range do vetor
+    private boolean validaValores(int linha, int coluna, ArrayList<Integer[]> j){
+        if(linha<0 || coluna<0 || linha>9 || coluna>9){ // Checa se os valores estão dentro do range do vetor
             System.out.println("Valores inválidos");
             return false;
         }
         for (Integer[] par : j) { // Checa se os valores já foram passados anteriormente
-            if (par[0] == l && par[1] == c) {
+            if (par[0] == linha && par[1] == coluna) {
                 System.out.println("Posição já utilizada");
                 return false;
             }
@@ -56,10 +56,10 @@ public class Jogo {
         }
 
     // Posiciona a peça nas posicoes passadas pelo jogador com cor
-    public boolean posicionaPeca(int l, int c,int id, String cor){
-        if(validaValores(l,c,this.jogadores.get(id).getPosicaoTesouros())){
+    public boolean posicionaPeca(int linha, int coluna,int id, String cor){
+        if(validaValores(linha,coluna,this.jogadores.get(id).getPosicaoTesouros())){
             if(validaCores(id, cor)){
-                this.jogadores.get(id).posicionarTesouro(l,c,cor);
+                this.jogadores.get(id).posicionarTesouro(linha,coluna,cor);
                 return true;
             }else{
                 return false;
@@ -70,9 +70,9 @@ public class Jogo {
     }
 
     // Posiciona a peça nas posicoes passadas pelo jogador sem cor
-    public boolean posicionaPeca(int l, int c,int id){
-        if(validaValores(l,c,this.jogadores.get(id).getPosicaoTesouros())){
-            this.jogadores.get(id).posicionarTesouro(l,c);
+    public boolean posicionaPeca(int linha, int coluna,int id){
+        if(validaValores(linha,coluna,this.jogadores.get(id).getPosicaoTesouros())){
+            this.jogadores.get(id).posicionarTesouro(linha,coluna);
             return true;
         }else{
             return false;
@@ -80,13 +80,13 @@ public class Jogo {
     }
 
     // Ataca o tabuleiro do adversário nas posições definidas pelo jogador do ataque
-    public boolean atacar(int l, int c, int a, int d){
-        if(validaValores(l,c,this.jogadores.get(a).getJogadas())){
-            if(this.jogadores.get(a).getJogadas().contains(new Integer[]{l,c})){
+    public boolean atacar(int linha, int coluna, int atacante, int defensor){
+        if(validaValores(linha,coluna,this.jogadores.get(atacante).getJogadas())){
+            if(this.jogadores.get(atacante).getJogadas().contains(new Integer[]{linha,coluna})){
                 System.out.println("Posição já informada");
                 return false;
             }else{
-                this.jogadores.get(a).atacar(new Integer[]{l,c},this.jogadores.get(d).getPosicao(l,c));
+                this.jogadores.get(atacante).atacar(new Integer[]{linha,coluna},this.jogadores.get(defensor).getPosicao(linha,coluna));
                 return true;
             }
         }else{

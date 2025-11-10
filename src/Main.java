@@ -10,14 +10,14 @@ public class Main {
 
     // Metodo para ambos os jogadores fazerem o posicionamento das peças
     public static void posicionaPecas(Jogo j, Scanner in){
-        int l,c,m;
+        int linha,coluna,modo;
         String cor;
 
         // Define se o jogo será jogado com cores ou sem
         System.out.println("\nComo desejam posicionar?");
         System.out.println("1 - Com cores");
         System.out.println("2 - Sem cores");
-        m = in.nextInt();
+        modo = in.nextInt();
 
         // Cada jogador posiciona uma peça por vez, portanto o loop se repete por 8 vezes até que todas sejam posicionadas.
         for(int i =1; i<=8;i++){
@@ -26,23 +26,23 @@ public class Main {
             do{
                 System.out.println("Jogador 1:");
                 System.out.println("Digite a linha em que quer esconder o tesouro (0 a 9):");
-                l = in.nextInt();
+                linha = in.nextInt();
                 System.out.println("\nDigite a coluna em que quer esconder o tesouro (0 a 9):");
-                c = in.nextInt();
+                coluna = in.nextInt();
                 in.nextLine();
 
                 // case 1 caso tenha sido escolhido o jogo com cores e case 2 caso tenha sido escolhido o jogo sem cores
-                switch (m){
+                switch (modo){
                     case 1:
                         System.out.println("\nDigite a cor do tesouro que deseja esconder (verde, vermelho, amarelo):");
                         System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
                         System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
                         System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
                         cor = in.nextLine();
-                        j1Jogou = j.posicionaPeca(l,c,0,cor);
+                        j1Jogou = j.posicionaPeca(linha,coluna,0,cor);
                         break;
                     case 2:
-                        j1Jogou = j.posicionaPeca(l,c,0);
+                        j1Jogou = j.posicionaPeca(linha,coluna,0);
                         break;
                     default:
                         System.out.println("Informe o valor da condição do jogo corretamente (Com cor ou sem cor).");
@@ -54,21 +54,21 @@ public class Main {
             do{
                 System.out.println("\nJogador 2:");
                 System.out.println("Digite a linha em que quer esconder o tesouro (0 a 9):");
-                l = in.nextInt();
+                linha = in.nextInt();
                 System.out.println("\nDigite a coluna em que quer esconder o tesouro (0 a 9):");
-                c = in.nextInt();
+                coluna = in.nextInt();
                 in.nextLine();
-                switch (m){
+                switch (modo){
                     case 1:
                         System.out.println("\nDigite a cor do tesouro que deseja esconder (verde, vermelho, amarelo):");
                         System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
                         System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
                         System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
                         cor = in.nextLine();
-                        j2Jogou = j.posicionaPeca(l,c,1,cor);
+                        j2Jogou = j.posicionaPeca(linha,coluna,1,cor);
                         break;
                     case 2:
-                        j2Jogou = j.posicionaPeca(l,c,1);
+                        j2Jogou = j.posicionaPeca(linha,coluna,1);
                         break;
                     default:
                         System.out.println("Informe o valor da condição do jogo corretamente (Com cor ou sem cor).");
@@ -81,7 +81,7 @@ public class Main {
 
     // Metodo que inicia as rodadas de ataque
     public static void ataques(Jogo j, Scanner in){
-        int l,c;
+        int linha,coluna;
 
         // O jogo pode ter no máximo 20 rodadas, portanto o loop se repete por até 20 vezes.
         for(int i = 1; i<=20;i++){
@@ -92,10 +92,10 @@ public class Main {
             do{
                 System.out.println("Jogador 1:");
                 System.out.println("Digite a linha que quer atacar (0 a 9):");
-                l = in.nextInt();
+                linha = in.nextInt();
                 System.out.println("\nDigite a coluna que quer atacar (0 a 9):");
-                c = in.nextInt();
-                j1Jogou = j.atacar(l,c,0,1);
+                coluna = in.nextInt();
+                j1Jogou = j.atacar(linha,coluna,0,1);
             }while (!j1Jogou);
 
             // Checa se o jogador já conseguiu alcançar os 20 pontos
@@ -109,10 +109,10 @@ public class Main {
             do{
                 System.out.println("\nJogador 2:");
                 System.out.println("Digite a linha que quer atacar (0 a 9):");
-                l = in.nextInt();
+                linha = in.nextInt();
                 System.out.println("\nDigite a coluna que quer atacar (0 a 9):");
-                c = in.nextInt();
-                j2Jogou = j.atacar(l,c,1,0);
+                coluna = in.nextInt();
+                j2Jogou = j.atacar(linha,coluna,1,0);
             }while (!j2Jogou);
 
             if(j.getJogadores().getLast().getPontos()>=20){
