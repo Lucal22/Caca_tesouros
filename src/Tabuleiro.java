@@ -5,7 +5,6 @@ public class Tabuleiro {
     Tabuleiro(){
         this.vetor = new int[10][10];
         for(int i = 0; i<this.vetor.length;i++){
-            this.vetor[i] = new int[10];
             for(int j = 0; j<this.vetor[i].length;j++){
                 this.vetor[i][j] = 0;
             }
