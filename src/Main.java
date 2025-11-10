@@ -110,7 +110,7 @@ public class Main {
                 System.out.println("\nJogador 2:");
                 System.out.println("Digite a linha que quer atacar (0 a 9):");
                 l = in.nextInt();
-                System.out.println("\nDigite a linha que quer atacar (0 a 9):");
+                System.out.println("\nDigite a coluna que quer atacar (0 a 9):");
                 c = in.nextInt();
                 j2Jogou = j.atacar(l,c,1,0);
             }while (!j2Jogou);
