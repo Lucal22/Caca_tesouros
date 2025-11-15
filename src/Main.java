@@ -61,9 +61,9 @@ public class Main {
                 switch (modo){
                     case 1:
                         System.out.println("\nDigite a cor do tesouro que deseja esconder (verde, vermelho, amarelo):");
-                        System.out.println("Verdes restantes: "+j.getJogadores().getFirst().getPçsVerdes());
-                        System.out.println("Vermelhas restantes: "+j.getJogadores().getFirst().getPçsVermelhas());
-                        System.out.println("Amarelas restantes: "+j.getJogadores().getFirst().getPçsAmarelas());
+                        System.out.println("Verdes restantes: "+j.getJogadores().getLast().getPçsVerdes());
+                        System.out.println("Vermelhas restantes: "+j.getJogadores().getLast().getPçsVermelhas());
+                        System.out.println("Amarelas restantes: "+j.getJogadores().getLast().getPçsAmarelas());
                         cor = in.nextLine();
                         j2Jogou = j.posicionaPeca(linha,coluna,1,cor);
                         break;
